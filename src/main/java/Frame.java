@@ -1,39 +1,40 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Frame {
-
-    public Frame(Integer firstShot, Integer secondShot) {
-        this.firstShot = firstShot;
-        this.secondShot = secondShot;
-    }
-
-    public Integer getFirstShot() {
-        return firstShot;
-    }
-
-    public void setFirstShot(Integer firstShot) {
-        this.firstShot = firstShot;
-    }
-
-    public Integer getSecondShot() {
-        return secondShot;
-    }
-
-    public void setSecondShot(Integer secondShot) {
-        this.secondShot = secondShot;
-    }
-
-
-
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-    Integer firstShot;
-    Integer secondShot;
+    List<Integer> shots;
     Integer total;
 
+    public void setHasFail(boolean hasFail) {
+        this.hasFail = hasFail;
+    }
 
+    boolean hasFail;
+
+    public List<Integer> getShots() {
+        return shots;
+    }
+
+    public void setShots(List<Integer> shots) {
+        this.shots = shots;
+    }
+
+    public void addShot(Integer move){
+        this.shots.add(move);
+    }
+
+    public Frame() {
+        this.shots = new ArrayList<>();
+        this.total = 0;
+        this.hasFail = false;
+    }
+    @Override
+    public String toString(){
+        System.out.print("Frames: ");
+        System.out.print(this.shots.toString());
+        System.out.print(" Has Fail: ");
+        System.out.print(this.hasFail +" ");
+        System.out.println();
+        return null;
+    }
 }
