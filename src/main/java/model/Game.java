@@ -1,32 +1,30 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Game {
-    String playerName;
-    List<Integer> moves;
-    List<String> originalMoves;
-
-    public List<Frame> getFrames() {
-        return frames;
-    }
-
-    List<Frame> frames;
+    private String playerName;
+    private List<Integer> moves;
+    private List<String> originalMoves;
+    private List<Frame> frames;
 
     public List<String> getOriginalMoves() {
         return originalMoves;
+    }
+
+    public List<Frame> getFrames() {
+        return frames;
     }
 
     public String getPlayerName() {
         return playerName;
     }
 
-
-
     public List<Integer> getMoves() {
         return moves;
     }
-
 
     public void addMove(Integer move){
         this.moves.add(move);
@@ -45,7 +43,6 @@ public class Game {
         this.moves = new ArrayList<>();
         this.frames = new ArrayList<>();
         this.originalMoves = new ArrayList<>();
-
     }
 
 
