@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 public class BowlingGame {
     public List<Game> games;
 
+    public List<Game> getGames() {
+        return games;
+    }
+
     public BowlingGame() {
         this.games = new ArrayList<>();
     }
