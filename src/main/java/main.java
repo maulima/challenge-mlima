@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class main {
@@ -12,13 +13,15 @@ public class main {
 
     static Integer totalShotsPerFrame = 2;
     static Integer totalAvailablePin = 10;
-    static Integer totalFramesLimit = 9;
+    static Integer totalFramesRegularMoves = 9;
+    static Integer totalFrames = 10;
 
     public static void main(String[] args){
         String fileInput = System.getProperty("user.dir") +"/src/main/resources/input-test.txt";
         try (Stream<String> stream = Files.lines(Paths.get(fileInput))){
             stream.forEach(p -> processPlayerMove(p));
             processFrames();
+            calulateTotal();
             printGames();
         }catch (IOException e){
 
@@ -54,7 +57,12 @@ public class main {
         games.add(search);
     }
     static void printGames(){
-
+//        Print numbers of frames
+        List<Integer> framesTitle = new ArrayList<>();
+        for(int frameNumber =1;frameNumber<=totalFrames;frameNumber++){
+            framesTitle.add(frameNumber);
+        }
+        System.out.println("Frame\t\t"+framesTitle.stream().map(String :: valueOf).collect(Collectors.joining("\t\t")));
         for(Game game: games){
             game.toString();
         }
@@ -73,13 +81,12 @@ public class main {
 
                 if (value == 0){
                     String originalShot = game.originalMoves.get(index);
-//                    System.out.println("Frame has error at frame: "+game.frames.size() + " at position: " + index + "value of the original shot: "+originalShot);
                     if(originalShot.equals("F")){
                         hasFail = true;
                     }
                 }
 
-                if(game.frames.size() == totalFramesLimit){
+                if(game.frames.size() == totalFramesRegularMoves){
 //                    Condition for special last frame
                     continue;
                 }
@@ -101,5 +108,30 @@ public class main {
         frame.setShots(shots);
         frame.setHasFail(hasFail);
         return frame;
+    }
+    static public void calulateTotal(){
+        for(Game game : games){
+            int index = 0;
+            int total = 0;
+            for(Frame frame: game.frames){
+                if(frame.shots.size()==1 ){
+                    total = setTotalFrame(game,frame,index,total);
+                }else if(frame.shots.stream().collect(Collectors.summingInt(Integer::intValue)) == 10){
+                    total = setTotalFrame(game,frame,index,total);
+                    index+=1;
+                }else {
+                    total += frame.shots.stream().collect(Collectors.summingInt(Integer::intValue));
+                    frame.setTotal(total);
+                    index+=1;
+                }
+                index+=1;
+            }
+        }
+    }
+    static int setTotalFrame(Game game,Frame frame,int index,int total) {
+        List<Integer> subList = game.getMoves().subList(index, index + 3);
+        total += subList.stream().collect(Collectors.summingInt(Integer::intValue));
+        frame.setTotal(total);
+        return total;
     }
 }

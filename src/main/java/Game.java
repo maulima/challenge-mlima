@@ -1,16 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
     String playerName;
     List<Integer> moves;
+    List<String> originalMoves;
+
+    public List<Frame> getFrames() {
+        return frames;
+    }
+
+    List<Frame> frames;
 
     public List<String> getOriginalMoves() {
         return originalMoves;
     }
-
-    List<String> originalMoves;
-    List<Frame> frames;
 
     public String getPlayerName() {
         return playerName;
@@ -40,15 +45,17 @@ public class Game {
         this.moves = new ArrayList<>();
         this.frames = new ArrayList<>();
         this.originalMoves = new ArrayList<>();
+
     }
+
+
     @Override
     public String toString(){
-        System.out.println("**************");
-        System.out.println("The player: "+this.playerName +" has "+ this.getMoves().size()+ " moves.");
-        System.out.println("Values: "+this.getMoves().toString());
-        System.out.println("The original moves: "+ this.getOriginalMoves().toString());
-        this.frames.toString();
-        System.out.println("**************");
+        System.out.println(this.getPlayerName());
+        System.out.println("Pinfalls\t"+this.getFrames().stream().map(String :: valueOf).collect(Collectors.joining("\t")));
+        List<String> scoreList = this.getFrames().stream().map(e -> e.toStringTotal() ).collect(Collectors.toList());
+        System.out.println("Score\t\t"+scoreList.stream().collect(Collectors.joining("\t\t")));
+
         return null;
     }
 }
