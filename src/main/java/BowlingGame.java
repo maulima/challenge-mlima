@@ -29,7 +29,7 @@ public class BowlingGame {
 //        Print numbers of frames
         System.out.println("Frame\t\t"+createFrameTitles(totalFrames).stream().map(String :: valueOf).collect(Collectors.joining("\t\t")));
         for(Game game: this.games){
-            game.toString();
+            System.out.println(game.toString());
         }
 
     }

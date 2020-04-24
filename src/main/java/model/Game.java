@@ -48,11 +48,12 @@ public class Game {
 
     @Override
     public String toString(){
-        System.out.println(this.getPlayerName());
-        System.out.println("Pinfalls\t"+this.getFrames().stream().map(String :: valueOf).collect(Collectors.joining("\t")));
-        List<String> scoreList = this.getFrames().stream().map(e -> e.toStringTotal() ).collect(Collectors.toList());
-        System.out.println("Score\t\t"+scoreList.stream().collect(Collectors.joining("\t\t")));
+        StringBuilder result = new StringBuilder();
 
-        return null;
+        result.append(this.getPlayerName()+"\n");
+        result.append("Pinfalls\t"+this.getFrames().stream().map(String :: valueOf).collect(Collectors.joining("\t"))+"\n");
+        result.append("Score\t\t"+this.getFrames().stream().map(e -> e.toStringTotal() ).collect(Collectors.toList()).stream().collect(Collectors.joining("\t\t"))+"\n");
+
+        return result.toString();
     }
 }
