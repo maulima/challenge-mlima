@@ -1,3 +1,5 @@
+package model;
+
 public class GroundRules {
     public Integer totalShotsPerFrame;
     public Integer totalAvailablePin;
@@ -12,11 +14,9 @@ public class GroundRules {
         return totalAvailablePin;
     }
 
-
     public Integer getTotalFramesRegularMoves() {
         return totalFramesRegularMoves;
     }
-
 
     public Integer getTotalFrames() {
         return totalFrames;

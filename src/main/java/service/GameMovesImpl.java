@@ -1,5 +1,8 @@
+package service;
+
 import model.Frame;
 import model.Game;
+import model.GroundRules;
 import model.PlayerMove;
 
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class GameMovesImpl implements GameMoves {
         search.addMove(playerMove.getMoveValue());
         games.add(search);
     }
-    public void processFrames(List<Game> games,GroundRules rules){
+    public void processFrames(List<Game> games, GroundRules rules){
         for(Game game: games){
             List<Integer> shots = new ArrayList<>();
             int totalPin = 0;

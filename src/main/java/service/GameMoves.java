@@ -1,4 +1,7 @@
+package service;
+
 import model.Game;
+import model.GroundRules;
 import model.PlayerMove;
 
 import java.util.List;
@@ -8,7 +11,7 @@ public interface GameMoves {
 
     void processMove(List<Game> games, PlayerMove playerMove);
 
-    void processFrames(List<Game> games,GroundRules rules);
+    void processFrames(List<Game> games, GroundRules rules);
 
     void calculateTotal(List<Game>games,int totalAvailablePin);
 
